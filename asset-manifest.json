@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/Contract_app_client/static/css/main.3b11b946.chunk.css",
+    "main.js": "/Contract_app_client/static/js/main.65cf60e9.chunk.js",
+    "main.js.map": "/Contract_app_client/static/js/main.65cf60e9.chunk.js.map",
+    "runtime-main.js": "/Contract_app_client/static/js/runtime-main.68cf223e.js",
+    "runtime-main.js.map": "/Contract_app_client/static/js/runtime-main.68cf223e.js.map",
+    "static/css/2.383c0125.chunk.css": "/Contract_app_client/static/css/2.383c0125.chunk.css",
+    "static/js/2.bfdfb6e3.chunk.js": "/Contract_app_client/static/js/2.bfdfb6e3.chunk.js",
+    "static/js/2.bfdfb6e3.chunk.js.map": "/Contract_app_client/static/js/2.bfdfb6e3.chunk.js.map",
+    "static/js/3.aba7cb33.chunk.js": "/Contract_app_client/static/js/3.aba7cb33.chunk.js",
+    "static/js/3.aba7cb33.chunk.js.map": "/Contract_app_client/static/js/3.aba7cb33.chunk.js.map",
+    "index.html": "/Contract_app_client/index.html",
+    "static/css/2.383c0125.chunk.css.map": "/Contract_app_client/static/css/2.383c0125.chunk.css.map",
+    "static/css/main.3b11b946.chunk.css.map": "/Contract_app_client/static/css/main.3b11b946.chunk.css.map",
+    "static/js/2.bfdfb6e3.chunk.js.LICENSE.txt": "/Contract_app_client/static/js/2.bfdfb6e3.chunk.js.LICENSE.txt",
+    "static/media/blanc.0e9d5fdf.jpg": "/Contract_app_client/static/media/blanc.0e9d5fdf.jpg",
+    "static/media/blank.ace68370.docx": "/Contract_app_client/static/media/blank.ace68370.docx",
+    "static/media/contract1_details_1.9a69f574.jpg": "/Contract_app_client/static/media/contract1_details_1.9a69f574.jpg",
+    "static/media/contract1_details_2.82e5ed9f.jpg": "/Contract_app_client/static/media/contract1_details_2.82e5ed9f.jpg",
+    "static/media/dogovor.5438c25f.jpg": "/Contract_app_client/static/media/dogovor.5438c25f.jpg",
+    "static/media/edit_icon.3b9367d4.svg": "/Contract_app_client/static/media/edit_icon.3b9367d4.svg",
+    "static/media/jumbo.fd3e9f26.jpg": "/Contract_app_client/static/media/jumbo.fd3e9f26.jpg",
+    "static/media/trash_icon.a309e0e4.svg": "/Contract_app_client/static/media/trash_icon.a309e0e4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.68cf223e.js",
+    "static/css/2.383c0125.chunk.css",
+    "static/js/2.bfdfb6e3.chunk.js",
+    "static/css/main.3b11b946.chunk.css",
+    "static/js/main.65cf60e9.chunk.js"
+  ]
+}
