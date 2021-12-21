@@ -65,14 +65,12 @@ const Auth = observer(() => {
 
   const auth = async () => {
     if (admin.admins.filter((obj) => obj.login === login).length > 0) {
-      
       try {
         let data;
         if (isLogin) {
-          data = await loginFunc(login + '@bsmu.by', password);
-          
+          data = await loginFunc(login + "@bsmu.by", password);
         } else {
-          data = await registration(login + '@bsmu.by', password);
+          data = await registration(login + "@bsmu.by", password);
         }
         user.setIsAuth(true);
         user.setUser(data);
@@ -80,15 +78,17 @@ const Auth = observer(() => {
       } catch (e) {
         alert(e.response.data.message);
       }
-
     } else {
       alert("У вас нет доступа!");
     }
-   
   };
 
   return (
-    <div className="auth_div">
+    <div onKeyDown={(e) => {
+      if (e.keyCode === 13) {
+        auth();
+      }
+    }} className="auth_div">
       <div className="auth">
         <h3>Администрирование договоров ПК</h3>
         <h4 style={{ textAlign: "center", color: "green", marginTop: "1rem" }}>
@@ -124,7 +124,7 @@ const Auth = observer(() => {
             fontSize: "20px",
           }}
         >
-          {isLogin ?(
+          {isLogin ? (
             <>
               <Col>
                 <div>Нет аккаунта?</div>
@@ -138,18 +138,14 @@ const Auth = observer(() => {
                   Зарегистрируйся!
                 </Nav.Link>
               </Col>
-              </>
+            </>
           ) : (
             <>
               <Col>
-                <div>Есть аккаунта?</div>
+                <div>Есть аккаунт?</div>
               </Col>
               <Col>
-                <Nav.Link
-                  style={{ color: "green" }}
-                  as={Link}
-                  to={LOGIN_ROUTE}
-                >
+                <Nav.Link style={{ color: "green" }} as={Link} to={LOGIN_ROUTE}>
                   Войдите!
                 </Nav.Link>
               </Col>
@@ -163,9 +159,7 @@ const Auth = observer(() => {
               variant="success"
               style={{ marginLeft: "3.7rem" }}
             >
-              {
-                isLogin ? 'Войти' : "Регистрация"
-              }
+              {isLogin ? "Войти" : "Регистрация"}
             </Button>
           </Col>
         </Row>

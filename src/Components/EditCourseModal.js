@@ -8,13 +8,18 @@ function EditCourseModal({ setVisible, setCourseEdit, courseEdit }) {
  
 
  const updateCoursee = () => {
-    updateCourse(courseEdit.id, courseEdit).then(
-      (data) => {
-        setCourseEdit({});
-        setVisible(false);
-        window.location.reload();
-      }
-    );
+    const re = /^\d+,\d+$/;
+    if(re.test(String(courseEdit.price).toLowerCase()) || courseEdit.price === '') {
+      updateCourse(courseEdit.id, courseEdit).then(
+        (data) => {
+          setCourseEdit({});
+          setVisible(false);
+          window.location.reload();
+        }
+      );
+    } else {
+      alert('Цена не соответствует формату');
+    }
   };
 
   return (
@@ -46,7 +51,7 @@ function EditCourseModal({ setVisible, setCourseEdit, courseEdit }) {
          
         />
         <input
-        onChange={(e) => setCourseEdit({...courseEdit, date: e.target.value})}
+        onChange={(e) => setCourseEdit({...courseEdit, date: e.target.value.split(' ').join('')})}
          value={courseEdit.date || ''}
           type="text"
           placeholder="Введите даты начала и окончания..."

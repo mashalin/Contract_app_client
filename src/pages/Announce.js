@@ -49,7 +49,7 @@ const Announce = observer(() => {
 
         <div>
           <Button onClick={updateAnn} className="announ_button" variant="success">
-            Добавить
+            Сохранить
           </Button>
         </div>
       </Container>

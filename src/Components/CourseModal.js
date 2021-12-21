@@ -9,18 +9,24 @@ function CourseModal({ setVisible }) {
   const [date, setDate] = useState("");
 
   const addCourse = () => {
-    createCourse({ number: number, name: name, price: price, date: date }).then(
-      (data) => {
-        setName("");
-        setNumber('');
-        setPrice("");
-        setDate("");
-        setVisible(false);
-        window.location.reload();
-      }
-    );
+    const re = /^\d+,\d+$/;
+    if(re.test(String(price).toLowerCase()) || price === '') {
+      createCourse({ number: number, name: name, price: price, date: date }).then(
+        (data) => {
+          setName("");
+          setNumber('');
+          setPrice("");
+          setDate("");
+          setVisible(false);
+          window.location.reload();
+        }
+      );
+    } else {
+      alert('Цена не соответствует формату');
+    }
   };
 
+  
   return (
     <div>
       <h3 style={{ textAlign: "center", marginTop: "2rem" }}>Добавить курс</h3>
@@ -45,7 +51,7 @@ function CourseModal({ setVisible }) {
           placeholder="Введите стоимость..."
         />
         <input
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e) => setDate(e.target.value.split(' ').join(''))}
           value={date}
           type="text"
           placeholder="Введите даты начала и окончания..."
