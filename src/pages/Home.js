@@ -21,7 +21,7 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   if (loading) {
-    return <Spinner variant="success" style={{marginLeft: '45%', marginTop: '20%', width: '50px', height: '50px'}} animation={'border'} />
+    return <Spinner variant="success" style={{marginLeft: '47%', marginTop: '20%', width: '50px', height: '50px'}} animation={'border'} />
   }
 
   return (

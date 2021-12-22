@@ -18,6 +18,7 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
   const [formValid, setFormValid] = useState(false);
   const check = useRef('');
 
+
   const [serNumberError, setSerNumberError] = useState("Заполните это поле!");
   const [dirNumberError, setDirNumberError] = useState("Заполните это поле!");
   const [fullNameError, setFullNameError] = useState("Заполните это поле!");
@@ -33,12 +34,12 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
     directionNamber: "",
     fullName: "",
     address: `Адрес:
-              _____________________________
-              _____________________________
-              _____________________________`,
+              ____________________________
+              ____________________________
+              ____________________________`,
     mobilePhone: "____________________________",
     homePhone: "____________________________",
-    organName: '_____________________________________________________________________________',
+    organName: '___________________________________________________________________________',
     organAddress: `_____________________________
                    _____________________________
                    _____________________________`,
@@ -48,7 +49,7 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
 
   const { course } = useContext(Context);
 
-
+  
   translate.engine = "google"; 
   translate.key = process.env.GOOGLE_KEY;
 

@@ -4,7 +4,7 @@ import { Container, Button } from "react-bootstrap";
 import AdminNavbar from "../Components/AdminNavbar";
 import { Context } from "..";
 import { fetchCathedras } from "../http/cathedraApi";
-import { fetchCustomers } from "../http/CustomerApi";
+import { fetchCustomers, createCustomer } from "../http/CustomerApi";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import { fetchCourses } from "../http/courseApi";
@@ -135,6 +135,11 @@ const Print = observer(() => {
   }, [cathValue]);
 
   function PrintNaprav() {
+
+    if (customer.customers.filter((obj) => obj.name === cusValue).length == 0) {
+      createCustomer({ name: cusValue }).then((data) => {});
+    }
+
     const Data = {
       cath: cathValue,
       address: address,
