@@ -1,5 +1,6 @@
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
+import { LOGIN_ROUTE } from "../utils/consts";
 
 function Navibar() {
   const mobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -68,6 +69,7 @@ function Navibar() {
                   Сводный план
                 </a>
               </Button>
+              <a href={LOGIN_ROUTE} >Auth</a>
             </Nav>
           </Navbar.Collapse>
         )}
