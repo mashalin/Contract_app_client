@@ -19,7 +19,7 @@ const Announce = observer(() => {
   const updateAnn = () => {
     updateAnnounce(announceText.id, announceText).then(
       (data) => {
-        window.location.reload();
+        //window.location.reload();
       }
     );
   };

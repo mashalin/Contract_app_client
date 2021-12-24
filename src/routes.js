@@ -7,7 +7,7 @@ import Customer from "./pages/Customer"
 import Home from "./pages/Home"
 import Print from "./pages/Print"
 import File from "./pages/File"
-import { ADMIN_ROUTE, ANNOUNCE_ROUTE, CATHEDRA_ROUTE, CONTRACT_ROUTE, COURSE_ROUTE,  CUSTOMER_ROUTE, FILE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRINT_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
+import { ADMIN_ROUTE, ANNOUNCE_ROUTE, CATHEDRA_ROUTE, CONTRACT_ROUTE, COURSE_ROUTE,  CUSTOMER_ROUTE, FILE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRINT_ROUTE } from "./utils/consts"
 
 export const authRoutes = [
     {
@@ -44,10 +44,6 @@ export const publicRoutes = [
     {
         path: HOME_ROUTE,
         Component: <Home/>
-    },
-    {
-        path: REGISTRATION_ROUTE,
-        Component: <Auth/>
     },
     {
         path: LOGIN_ROUTE,

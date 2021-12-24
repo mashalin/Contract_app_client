@@ -1,13 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import { Button, Row, Col, Nav } from "react-bootstrap";
-import axios from "axios";
+import { Button } from "react-bootstrap";
 import { fetchAdmins } from "../http/AdminApi";
 import { Context } from "..";
 import { observer } from "mobx-react-lite";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { COURSE_ROUTE, LOGIN_ROUTE } from "../utils/consts";
-import { REGISTRATION_ROUTE } from "../utils/consts";
-import { loginFunc, registration } from "../http/userApi";
+import {  useNavigate } from "react-router-dom";
+import { COURSE_ROUTE} from "../utils/consts";
+import { loginFunc } from "../http/userApi";
 
 const Auth = observer(() => {
   const [login, setLogin] = useState("");
@@ -24,8 +22,6 @@ const Auth = observer(() => {
   const { user } = useContext(Context);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const isLogin = location.pathname === LOGIN_ROUTE;
 
   useEffect(() => {
     fetchAdmins().then((data) => admin.setAdmins(data));
@@ -67,11 +63,9 @@ const Auth = observer(() => {
     if (admin.admins.filter((obj) => obj.login === login).length > 0) {
       try {
         let data;
-        if (isLogin) {
-          data = await loginFunc(login + "@bsmu.by", password);
-        } else {
-          data = await registration(login + "@bsmu.by", password);
-        }
+
+        data = await loginFunc(login + "@bsmu.by", password);
+
         user.setIsAuth(true);
         user.setUser(data);
         navigate(COURSE_ROUTE);
@@ -84,15 +78,18 @@ const Auth = observer(() => {
   };
 
   return (
-    <div onKeyDown={(e) => {
-      if (e.keyCode === 13) {
-        auth();
-      }
-    }} className="auth_div">
+    <div
+      onKeyDown={(e) => {
+        if (e.keyCode === 13) {
+          auth();
+        }
+      }}
+      className="auth_div"
+    >
       <div className="auth">
         <h3>Администрирование договоров ПК</h3>
         <h4 style={{ textAlign: "center", color: "green", marginTop: "1rem" }}>
-          {isLogin ? "Авторизация" : "Регистрация"}
+          Авторизация
         </h4>
         {loginEmpty && loginError && (
           <div style={{ color: "red" }}>{loginError}</div>
@@ -116,53 +113,19 @@ const Auth = observer(() => {
           type="password"
           placeholder="Введите пароль..."
         />
-        <Row
+
+        <Button
+          disabled={!formValid}
+          onClick={auth}
+          variant="success"
           style={{
             marginTop: "2rem",
-            alignItems: "center",
             fontFamily: "Roboto",
             fontSize: "20px",
           }}
         >
-          {isLogin ? (
-            <>
-              <Col>
-                <div>Нет аккаунта?</div>
-              </Col>
-              <Col>
-                <Nav.Link
-                  style={{ color: "green" }}
-                  as={Link}
-                  to={REGISTRATION_ROUTE}
-                >
-                  Зарегистрируйся!
-                </Nav.Link>
-              </Col>
-            </>
-          ) : (
-            <>
-              <Col>
-                <div>Есть аккаунт?</div>
-              </Col>
-              <Col>
-                <Nav.Link style={{ color: "green" }} as={Link} to={LOGIN_ROUTE}>
-                  Войдите!
-                </Nav.Link>
-              </Col>
-            </>
-          )}
-
-          <Col>
-            <Button
-              disabled={!formValid}
-              onClick={auth}
-              variant="success"
-              style={{ marginLeft: "3.7rem" }}
-            >
-              {isLogin ? "Войти" : "Регистрация"}
-            </Button>
-          </Col>
-        </Row>
+          Войти
+        </Button>
       </div>
     </div>
   );

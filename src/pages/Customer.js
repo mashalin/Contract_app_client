@@ -25,7 +25,7 @@ const Customer = observer(() => {
     if (value) {
       createCustomer({ name: value }).then((data) => {
         setValue("");
-        window.location.reload();
+        //window.location.reload();
       });
     }
   };
@@ -36,7 +36,7 @@ const Customer = observer(() => {
 
   function deleteCus(id) {
     deleteCustomer(id).then((data) => {
-      window.location.reload();
+      //window.location.reload();
     });
   }
 

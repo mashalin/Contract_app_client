@@ -24,7 +24,7 @@ const Course = observer( () => {
 
     function deleteC(id) {
         deleteCourse(id).then( data => {
-            window.location.reload();
+            //window.location.reload();
         })
     }
 

@@ -20,7 +20,7 @@ const  Cathedra = observer( () => {
     
     function deleteCath(id) {
         deleteCathedra(id).then( data => {
-            window.location.reload();
+            //window.location.reload();
         })
     }
 

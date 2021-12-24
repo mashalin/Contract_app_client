@@ -11,7 +11,7 @@ function EditCathedraModal({ setVisible, setCathedraEdit, cathedraEdit }) {
       (data) => {
         setCathedraEdit({});
         setVisible(false);
-        window.location.reload();
+        //window.location.reload();
       }
     );
   };
