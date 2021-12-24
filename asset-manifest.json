@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/Contract_app_client/static/css/main.1d00e9f8.chunk.css",
-    "main.js": "/Contract_app_client/static/js/main.9c2df868.chunk.js",
-    "main.js.map": "/Contract_app_client/static/js/main.9c2df868.chunk.js.map",
+    "main.js": "/Contract_app_client/static/js/main.1a8e8a12.chunk.js",
+    "main.js.map": "/Contract_app_client/static/js/main.1a8e8a12.chunk.js.map",
     "runtime-main.js": "/Contract_app_client/static/js/runtime-main.68cf223e.js",
     "runtime-main.js.map": "/Contract_app_client/static/js/runtime-main.68cf223e.js.map",
     "static/css/2.383c0125.chunk.css": "/Contract_app_client/static/css/2.383c0125.chunk.css",
-    "static/js/2.cdb07d9d.chunk.js": "/Contract_app_client/static/js/2.cdb07d9d.chunk.js",
-    "static/js/2.cdb07d9d.chunk.js.map": "/Contract_app_client/static/js/2.cdb07d9d.chunk.js.map",
+    "static/js/2.ee76363a.chunk.js": "/Contract_app_client/static/js/2.ee76363a.chunk.js",
+    "static/js/2.ee76363a.chunk.js.map": "/Contract_app_client/static/js/2.ee76363a.chunk.js.map",
     "static/js/3.aba7cb33.chunk.js": "/Contract_app_client/static/js/3.aba7cb33.chunk.js",
     "static/js/3.aba7cb33.chunk.js.map": "/Contract_app_client/static/js/3.aba7cb33.chunk.js.map",
     "index.html": "/Contract_app_client/index.html",
     "static/css/2.383c0125.chunk.css.map": "/Contract_app_client/static/css/2.383c0125.chunk.css.map",
     "static/css/main.1d00e9f8.chunk.css.map": "/Contract_app_client/static/css/main.1d00e9f8.chunk.css.map",
-    "static/js/2.cdb07d9d.chunk.js.LICENSE.txt": "/Contract_app_client/static/js/2.cdb07d9d.chunk.js.LICENSE.txt",
+    "static/js/2.ee76363a.chunk.js.LICENSE.txt": "/Contract_app_client/static/js/2.ee76363a.chunk.js.LICENSE.txt",
     "static/media/blanc.0e9d5fdf.jpg": "/Contract_app_client/static/media/blanc.0e9d5fdf.jpg",
     "static/media/blank.ace68370.docx": "/Contract_app_client/static/media/blank.ace68370.docx",
     "static/media/contract1_details_1.9a69f574.jpg": "/Contract_app_client/static/media/contract1_details_1.9a69f574.jpg",
@@ -26,8 +26,8 @@
   "entrypoints": [
     "static/js/runtime-main.68cf223e.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.cdb07d9d.chunk.js",
+    "static/js/2.ee76363a.chunk.js",
     "static/css/main.1d00e9f8.chunk.css",
-    "static/js/main.9c2df868.chunk.js"
+    "static/js/main.1a8e8a12.chunk.js"
   ]
 }
