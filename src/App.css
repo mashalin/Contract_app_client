@@ -423,3 +423,7 @@ body {
     border-color: #198754 !important;
   }
  
+.spinner {
+    margin-left: calc(50% - 50px / 2);
+    margin-top: 20%;
+}
