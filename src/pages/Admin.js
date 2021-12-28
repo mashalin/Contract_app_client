@@ -21,7 +21,7 @@ const Admin = observer(() => {
     if (login) {
       createAdmin({ login: login }).then((data) => {
         setLogin("");
-        //window.location.reload();
+        window.location.reload();
       });
     }
   };
@@ -35,7 +35,7 @@ const Admin = observer(() => {
           });
         }
       });
-      //window.location.reload();
+      window.location.reload();
     });
   }
 
