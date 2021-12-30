@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mashalin.github.io/Contract_app_client/",
+  "homepage": "https://172.20.0.49",
   "dependencies": {
     "@azure/msal-browser": "^2.20.0",
     "@azure/msal-react": "^1.1.2",

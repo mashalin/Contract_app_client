@@ -71,7 +71,7 @@ function File() {
 
   function DownloadTemp1() {
     axios
-      .get("http://localhost:5000/download", { responseType: "blob" })
+      .get("http://172.20.0.49:5000/download", { responseType: "blob" })
       .then((res) => {
         const pdfBlob3 = new Blob([res.data], { type: "application/odt" });
 
@@ -81,7 +81,7 @@ function File() {
 
   function DownloadTemp2() {
     axios
-      .get("http://localhost:5000/download2", { responseType: "blob" })
+      .get("http://172.20.0.49:5000/download2", { responseType: "blob" })
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/odt" });
 
@@ -91,7 +91,7 @@ function File() {
 
   function DownloadTemp3() {
     axios
-      .get("http://localhost:5000/download3", { responseType: "blob" })
+      .get("http://172.20.0.49:5000/download3", { responseType: "blob" })
       .then((res) => {
         const pdfBlob2 = new Blob([res.data], { type: "application/odt" });
 
