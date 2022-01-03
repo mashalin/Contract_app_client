@@ -21,7 +21,9 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   if (loading) {
-    return <Spinner className='spinner' variant="success" style={{width: '50px', height: '50px'}} animation={'border'} />
+    return <div className='spinner'>
+      <Spinner variant="success" style={{width: '50px', height: '50px'}} animation={'border'} />
+    </div>
   }
 
   return (

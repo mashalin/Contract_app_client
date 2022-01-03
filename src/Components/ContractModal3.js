@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useEffect } from "react";
 import details1 from "./../imgs/contract1_details_1.jpg";
 import details2 from "./../imgs/contract1_details_2.jpg";
 import { Button, Container, Row, Col } from "react-bootstrap";
@@ -17,7 +17,7 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
   const [dirNumberEmpty, setDirNumberEmpty] = useState(false);
   const [fullNameEmpty, setFullNameEmpty] = useState(false);
   const [formValid, setFormValid] = useState(false);
-  const check = useRef("");
+  const [checked, setChecked] = useState(true);
 
   const [serNumberError, setSerNumberError] = useState("Заполните это поле!");
   const [dirNumberError, setDirNumberError] = useState("Заполните это поле!");
@@ -50,18 +50,13 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
   translate.engine = "google"; 
   translate.key = process.env.GOOGLE_KEY;
 
-  function checkChange() {
-    if (
-      !check.current.checked ||
-      serNumberError ||
-      dirNumberError ||
-      fullNameError
-    ) {
+  useEffect( () => {
+    if (!checked || serNumberError || dirNumberError || fullNameError) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }
+ }, [checked, serNumberError, dirNumberError, fullNameError])
 
   useEffect(() => {
     fetchCourses().then((data) => course.setCourses(data.rows));
@@ -374,7 +369,7 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
       </div>
       <div className="hr"></div>
       <div style={{ display: "flex" }}>
-        <input id="check3" type="checkbox" ref={check} onChange={checkChange} />
+        <input id="check3" type="checkbox" checked={checked} onChange={() => setChecked(!checked)} />
         <label
           style={{
             marginLeft: "10px",
