@@ -14,7 +14,7 @@ function EditCourseModal({ setVisible, setCourseEdit, courseEdit }) {
         (data) => {
           setCourseEdit({});
           setVisible(false);
-          //window.location.reload();
+          window.location.reload();
         }
       );
     } else {

@@ -18,7 +18,7 @@ function CourseModal({ setVisible }) {
           setPrice("");
           setDate("");
           setVisible(false);
-          //window.location.reload();
+          window.location.reload();
         }
       );
     } else {

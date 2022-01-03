@@ -13,7 +13,7 @@ function EditCustomerModal({ setVisible, setCustomerEdit, customerEdit }) {
       (data) => {
         setCustomerEdit({});
         setVisible(false);
-        //window.location.reload();
+        window.location.reload();
       }
     );
   };

@@ -21,7 +21,7 @@ function CathedraModal({ setVisible }) {
         setAddress("");
         setTelephone("");
         setVisible(false);
-        //window.location.reload();
+        window.location.reload();
       });
     }
   };
