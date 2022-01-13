@@ -449,3 +449,7 @@ body {
   -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
 }
+
+.cath_address_active {
+    background-color: rgb(236, 235, 235);
+}

@@ -48,6 +48,12 @@ const Print = observer(() => {
   translate.engine = "google"; 
   translate.key = process.env.GOOGLE_KEY;
 
+  const [toogleState, setToogleState] = useState(0); 
+
+  const toogleTab = (index) => {
+    setToogleState(index);      
+  }
+
 
   useEffect(() => {
     fetchCathedras().then((data) => cathedra.setCathedras(data));
@@ -277,7 +283,14 @@ const Print = observer(() => {
           {cathedra.cathedras.map((cath) => {
             if (cath.name == cathValue) {
               return (
-                <div onClick={(e) => setAddress(e.target.textContent)} className="cath_address" key={cath.id}>
+                <div onClick={(e) => {
+                  toogleTab(cath.id);
+                  setAddress(e.target.textContent);
+                }} className={
+                  toogleState === cath.id
+                  ? 'cath_address cath_address_active'
+                  : 'cath_address'
+                } key={cath.id}> 
                   {cath.address}
                 </div>
               );
