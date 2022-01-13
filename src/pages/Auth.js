@@ -4,8 +4,9 @@ import { fetchAdmins } from "../http/AdminApi";
 import { Context } from "..";
 import { observer } from "mobx-react-lite";
 import {  useNavigate } from "react-router-dom";
-import { COURSE_ROUTE} from "../utils/consts";
+import { COURSE_ROUTE, HOME_ROUTE} from "../utils/consts";
 import { loginFunc } from "../http/userApi";
+import close from './../imgs/close.svg'
 
 const Auth = observer(() => {
   const [login, setLogin] = useState("");
@@ -86,7 +87,10 @@ const Auth = observer(() => {
       }}
       className="auth_div"
     >
-      <div className="auth">
+      <div style={{position: 'relative'}} className="auth">
+
+      <img onClick={() => navigate(HOME_ROUTE)} src={close} alt="" className="close_img" />
+
         <h3>Администрирование договоров ПК</h3>
         <h4 style={{ textAlign: "center", color: "green", marginTop: "1rem" }}>
           Авторизация

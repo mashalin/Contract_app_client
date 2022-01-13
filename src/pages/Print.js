@@ -7,7 +7,7 @@ import { fetchCathedras } from "../http/cathedraApi";
 import { fetchCustomers, createCustomer } from "../http/CustomerApi";
 import axios from "axios";
 import { saveAs } from "file-saver";
-import { fetchCourses } from "../http/courseApi";
+import { fetchAllCourses } from "../http/courseApi";
 import translate from 'translate';
 
 const Print = observer(() => {
@@ -58,11 +58,11 @@ const Print = observer(() => {
   }, []);
 
   useEffect(() => {
-    fetchCourses().then((data) => course.setCourses(data.rows));
+    fetchAllCourses().then((data) => course.setAllCourses(data));
   }, []);
 
   useEffect(() => {
-    course.courses.forEach((cours) => {
+    course.allCourses.forEach((cours) => {
       if (cours.number == firstNum) {
         setCour(cours.name);
         setDate(cours.date);
@@ -320,7 +320,7 @@ const Print = observer(() => {
             type="number"
             placeholder="Порядковый номер образовательной программы..."
           />
-          {course.courses.map((cours) => {
+          {course.allCourses.map((cours) => {
             if (cours.number == firstNum) {
               return <div key={cours.id}> {cours.name} </div>;
             }

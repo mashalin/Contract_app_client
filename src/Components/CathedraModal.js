@@ -9,7 +9,7 @@ function CathedraModal({ setVisible }) {
   const [telephone, setTelephone] = useState("");
 
   const addCathedra = () => {
-    if (name && zav_name && address && telephone) {
+    if (name && address && telephone) {
       createCathedra({
         name: name,
         zav_name: zav_name,

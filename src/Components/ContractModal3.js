@@ -5,7 +5,7 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { saveAs } from "file-saver";
 import { Context } from "..";
-import { fetchCourses } from "../http/courseApi";
+import { fetchAllCourses } from "../http/courseApi";
 import axios from "axios";
 import translate from 'translate';
 
@@ -58,12 +58,12 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
     }
  }, [checked, serNumberError, dirNumberError, fullNameError])
 
-  useEffect(() => {
-    fetchCourses().then((data) => course.setCourses(data.rows));
-  }, []);
+ useEffect(() => {
+  fetchAllCourses().then((data) => course.setAllCourses(data));
+}, []);
 
   useEffect(() => {
-    course.courses.forEach((cours) => {
+    course.allCourses.forEach((cours) => {
       if (cours.number == pdf.serialNamber) {
         setCour(cours.name);
         setDate(cours.date);
@@ -198,7 +198,7 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
             placeholder="Введите порядковый номер..."
             className="modal1_input"
           />
-          {course.courses.map((cours) => {
+          {course.allCourses.map((cours) => {
             if (cours.number == pdf.serialNamber) {
               return <div key={cours.id}> {cours.name} </div>;
             }

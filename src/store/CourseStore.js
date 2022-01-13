@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 export default class CourseStore {
     constructor() {
+        this._allCourses = [];
         this._courses = [];
         this._page = 1;
         this._totalCount = 0;
@@ -11,6 +12,10 @@ export default class CourseStore {
 
     setCourses(courses) {
         this._courses = courses;
+    }
+
+    setAllCourses(courses) {
+        this._allCourses = courses;
     }
 
     setPage(page) {
@@ -27,6 +32,10 @@ export default class CourseStore {
 
     get courses() {
         return this._courses;
+    }
+
+    get allCourses() {
+        return this._allCourses;
     }
 
     get totalCount() {

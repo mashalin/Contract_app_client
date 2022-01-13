@@ -12,6 +12,11 @@ export const fetchCourses = async (page, limit = 15) => {
     return data;
 }
 
+export const fetchAllCourses = async () => {
+    const {data} = await $host.get('api/allCourses');
+    return data;
+}
+
 export const fetchOneCourse = async (id) => {
     const {data} = await $host.get('api/course/' + id);
     return data;
