@@ -277,7 +277,7 @@ const Print = observer(() => {
           {cathedra.cathedras.map((cath) => {
             if (cath.name == cathValue) {
               return (
-                <div className="cath_address" key={cath.id}>
+                <div onClick={(e) => setAddress(e.target.textContent)} className="cath_address" key={cath.id}>
                   {cath.address}
                 </div>
               );
