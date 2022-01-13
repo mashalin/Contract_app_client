@@ -107,9 +107,9 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
   function createAndDownloadPdf() {
     setLoading(true);
     axios
-      .post("http://172.20.0.49:5000/create-pdf1", server)
+      .post(process.env.REACT_APP_HOST + "/create-pdf1", server)
       .then(() => 
-        axios.get("http://172.20.0.49:5000/contract1", { responseType: "blob" })
+        axios.get(process.env.REACT_APP_HOST + "/contract1", { responseType: "blob" })
       )
       .then((res) => {
         const pdfBlob = new Blob([res.data], { type: "application/pdf" });

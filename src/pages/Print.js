@@ -155,9 +155,9 @@ const Print = observer(() => {
 
     if (select == 'Бесплатное') {
       axios
-      .post("http://172.20.0.49:5000/create-docx", Data)
+      .post(process.env.REACT_APP_HOST + "/create-docx", Data)
       .then(() =>
-        axios.get("http://172.20.0.49:5000/docx", { responseType: "blob" })
+        axios.get(process.env.REACT_APP_HOST + "/docx", { responseType: "blob" })
       )
       .then((res) => {
         const docxBlob = new Blob([res.data], { type: "application/docx" });
@@ -169,9 +169,9 @@ const Print = observer(() => {
       });
     } else if (select == 'Платное_физ') {
       axios
-      .post("http://172.20.0.49:5000/create-docx2", Data)
+      .post(process.env.REACT_APP_HOST + "/create-docx2", Data)
       .then(() =>
-        axios.get("http://172.20.0.49:5000/docx2", { responseType: "blob" })
+        axios.get(process.env.REACT_APP_HOST + "/docx2", { responseType: "blob" })
       )
       .then((res) => {
         const docxBlob2 = new Blob([res.data], { type: "application/docx" });
@@ -183,9 +183,9 @@ const Print = observer(() => {
       });
     } else {
       axios
-      .post("http://172.20.0.49:5000/create-docx3", Data)
+      .post(process.env.REACT_APP_HOST + "/create-docx3", Data)
       .then(() =>
-        axios.get("http://172.20.0.49:5000/docx3", { responseType: "blob" })
+        axios.get(process.env.REACT_APP_HOST + "/docx3", { responseType: "blob" })
       )
       .then((res) => {
         const docxBlob3 = new Blob([res.data], { type: "application/docx" });
