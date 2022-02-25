@@ -8,6 +8,9 @@ import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { fetchAllCourses } from "../http/courseApi";
 import translate from 'translate';
+import { fetchYear } from "../http/YearApi";
+import { createContract } from "../http/ContractApi";
+import { da, yet } from "../functions/dateFunc";
 
 
 const ContractModal1 = observer(({ setVisible, setLoading }) => {
@@ -47,9 +50,16 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
     charter: "_______________________",
   });
 
-  const { course } = useContext(Context);
+  const [yearText, setYearText] = useState({});
 
-  
+  const [time, setTime] = useState('');
+
+  const [id, setId] = useState('');
+
+  const { course } = useContext(Context);
+  const { year } = useContext(Context);
+
+
   translate.engine = "google"; 
   translate.key = process.env.GOOGLE_KEY;
 
@@ -63,6 +73,7 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
 
  useEffect(() => {
   fetchAllCourses().then((data) => course.setAllCourses(data));
+  fetchYear().then((data) => setYearText(data[0]));
 }, []);
 
 
@@ -70,6 +81,7 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
     course.allCourses.forEach((cours) => {
       if (cours.number == pdf.serialNamber) {
         setCour(cours.name);
+        setId(cours.id);
         setDate(cours.date);
       }
 
@@ -80,11 +92,13 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
     if (date) {
       let dates = date.split("-");
       dates = dates.map(function (el) {
-        return el + ".2022";
+        return el + `.${yearText.name}`;
       });
       dates[0] = dates[0] + " по ";
       let res = dates.join("");
       setNewDate(res);
+    } else {
+      setNewDate('');
     }
   }, [date]);
 
@@ -105,7 +119,8 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
   }
 
   function createAndDownloadPdf() {
-    setLoading(true);
+    if (yet(time) === 'go'){
+      setLoading(true);
     axios
       .post(process.env.REACT_APP_HOST + "/create-pdf1", server)
       .then(() => 
@@ -117,9 +132,15 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
         text.then(data => {
           data = data.split(' ').join('_');
           saveAs(pdfBlob, `BGMU_Dogovor_${data}.pdf`);
+          createContract({ fullname: server.fullName, courseId: id }).then((data) => {});
         })
       }).finally( () => setLoading(false));
     setVisible(false);
+    } else if (yet(time) === 'forbidden') {
+      alert('Курс уже начался!');
+    } else {
+      alert('Регистрация на курс начнётся за две недели до начала!');
+    }
   }
 
   
@@ -151,6 +172,11 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
     };
     setServer(newObj);
   }, [pdf]);
+
+  useEffect(() => {
+      setTime(da(newDate));
+  }, [newDate])
+
 
   const blurHandler = (e) => {
     switch (e.target.name) {

@@ -10,9 +10,11 @@ import CourseStore from './store/CourseStore';
 import AdminStore from './store/AdminStore';
 import AnnounceStore from './store/AnnounceStore';
 import FileStore from './store/FileStore';
+import YearStore from './store/YearStore';
+import ContractStore from './store/ContractStore';
+import JournalStore from './store/JournalStore';
 
 export const Context = createContext(null);
-
 
 
 ReactDOM.render(
@@ -24,6 +26,9 @@ ReactDOM.render(
     admin: new AdminStore(),
     announ: new AnnounceStore(),
     file: new FileStore(),
+    year: new YearStore(),
+    contract: new ContractStore(),
+    journal: new JournalStore(),
   }} >
     <App />
   </Context.Provider>,

@@ -1,12 +1,17 @@
+import { useEffect, useState } from 'react';
 import {Col, Row} from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 function Footer() {
 
-    
-    
+    const [year, setYear] = useState(2022);
 
     const mobile = useMediaQuery({ query: '(max-width: 767px)' });
+
+    useEffect( () => {
+        const today = new Date();
+        setYear(today.getFullYear());
+    }, [])
 
     return(
 
@@ -14,7 +19,7 @@ function Footer() {
             <Row>
                 <Col sm={6} md={7} lg={8} >
                  <div className='footer_div' style={{marginLeft: '7%'}} >
-                   © 1921—2021 Учреждение образования «Белорусский государственный медицинский университет».
+                   © 1921—{year} Учреждение образования «Белорусский государственный медицинский университет».
                  </div>
                 </Col>
                 <Col sm={6} md={5} lg={4} >

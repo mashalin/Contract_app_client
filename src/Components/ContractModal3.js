@@ -8,6 +8,9 @@ import { Context } from "..";
 import { fetchAllCourses } from "../http/courseApi";
 import axios from "axios";
 import translate from 'translate';
+import { fetchYear } from "../http/YearApi";
+import { createContract } from "../http/ContractApi";
+import { da, yet } from "../functions/dateFunc";
 
 const ContractModal3 = observer(({ setVisible, setLoading }) => {
   const [img, setImg] = useState(false);
@@ -26,7 +29,7 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
   const [server, setServer] = useState({});
   const [cour, setCour] = useState("");
   const [date, setDate] = useState("");
-  const [newDate, setNewDate] = useState("___.___.2022 по ___.___.2022");
+  const [newDate, setNewDate] = useState("");
   const [price, setPrice] = useState('');
   const [pdf, setPdf] = useState({
     serialNamber: "",
@@ -45,7 +48,14 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
     charter: "_______________________",
   });
 
+  const [yearText, setYearText] = useState({});
+
+  const [id, setId] = useState('');
+
+  const { year } = useContext(Context);
   const { course } = useContext(Context);
+
+  const [time, setTime] = useState('');
 
   translate.engine = "google"; 
   translate.key = process.env.GOOGLE_KEY;
@@ -60,7 +70,12 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
 
  useEffect(() => {
   fetchAllCourses().then((data) => course.setAllCourses(data));
+  fetchYear().then((data) => setYearText(data[0]));
 }, []);
+
+useEffect( () => {
+  setNewDate(`___.___.${yearText.name} по ___.___.${yearText.name}`);
+}, [yearText])
 
   useEffect(() => {
     course.allCourses.forEach((cours) => {
@@ -68,6 +83,7 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
         setCour(cours.name);
         setDate(cours.date);
         setPrice(cours.price);
+        setId(cours.id);
       }
     });
   }, [pdf.serialNamber]);
@@ -76,11 +92,13 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
     if (date) {
       let dates = date.split("-");
       dates = dates.map(function (el) {
-        return el + ".2022";
+        return el + `.${yearText.name}`;
       });
       dates[0] = dates[0] + " по ";
       let res = dates.join("");
       setNewDate(res);
+    } else {
+      setNewDate('');
     }
   }, [date]);
 
@@ -101,7 +119,8 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
   }
 
   function createAndDownloadPdf() {
-    setLoading(true);
+    if(yet(time) === 'go') {
+      setLoading(true);
     axios
       .post(process.env.REACT_APP_HOST + "/create-pdf3", server)
       .then(() =>
@@ -113,10 +132,16 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
         text.then(data => {
           data = data.split(' ').join('_');
           saveAs(pdfBlob, `BGMU_Dogovor_${data}.pdf`);
+          createContract({ fullname: server.fullName, courseId: id }).then((data) => {});
         })
 
       }).finally( () => setLoading(false));
     setVisible(false);
+    } else if (yet(time) === 'forbidden') {
+      alert('Курс уже начался!');
+    } else {
+      alert('Регистрация на курс начнётся за две недели до начала!');
+    }
   }
 
   function handleChange({ target: { value, name } }) {
@@ -144,9 +169,14 @@ const ContractModal3 = observer(({ setVisible, setLoading }) => {
       cour: cour,
       date: newDate,
       price: price,
+      year: yearText.name
     };
     setServer(newObj);
   }, [pdf]);
+
+  useEffect(() => {
+    setTime(da(newDate));
+}, [newDate])
 
   const blurHandler = (e) => {
     switch (e.target.name) {

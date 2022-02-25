@@ -9,8 +9,11 @@ import {
   ANNOUNCE_ROUTE,
   CATHEDRA_ROUTE,
   COURSE_ROUTE,
+  CREATE_DOGOVOR_ROUTE,
   CUSTOMER_ROUTE,
+  DOGOVOR_ROUTE,
   FILE_ROUTE,
+  JOURNAL_ROUTE,
   LOGIN_ROUTE,
   PRINT_ROUTE,
 } from "../utils/consts";
@@ -34,7 +37,7 @@ const AdminNavbar = observer( () => {
         bg="success"
         fixed="top"
         collapseOnSelect
-        expand="lg"
+        expand="xl"
         variant="dark"
       >
         <Navbar.Brand className="nav-brand" style={{ marginLeft: "5%" }}>
@@ -71,6 +74,15 @@ const AdminNavbar = observer( () => {
             </Nav.Link>
             <Nav.Link as={Link} to={FILE_ROUTE}>
               Редактор шаблонов
+            </Nav.Link>
+            <Nav.Link as={Link} to={DOGOVOR_ROUTE}>
+              Редактор слушателей
+            </Nav.Link>
+            <Nav.Link as={Link} to={CREATE_DOGOVOR_ROUTE}>
+              Печать приказов
+            </Nav.Link>
+            <Nav.Link as={Link} to={JOURNAL_ROUTE}>
+              Журнал направлений
             </Nav.Link>
           </Nav>
           <Nav style={{ marginRight: "5%", marginLeft: "5%" }}>

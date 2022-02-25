@@ -12,13 +12,15 @@ const Anounce = observer(() => {
   }, []);
 
   return (
-    <Container style={{ marginTop: "5rem", marginBottom: "5rem" }}>
+    <div style={{backgroundColor: '#cdcaca' }}>
+      <Container style={{ paddingTop: "5rem", paddingBottom: "5rem"}}>
       {announ.announces.map((ann) => {
-        return <div key={ann.id} className="anounce">
+        return <div style={{backgroundColor: 'white' }} key={ann.id} className="anounce">
             {ann.name}
         </div>;
       })}
     </Container>
+    </div>
   );
 });
 

@@ -13,7 +13,7 @@ function ContractCard ( {title, buttonStyle, setModal} ) {
             { mobile
               ? <Card className="modile-card" style={{width: '18rem', minHeight: '413px', marginTop: '1.5rem' }} >
                    <Card.Img variant="top" src={dogovor} />
-                  <Card.Body>
+                  <Card.Body style={{backgroundColor: '#e1dede'}} >
                     <Card.Title style={{fontSize: '18px'}} >
                        {title}
                     </Card.Title>
@@ -22,7 +22,7 @@ function ContractCard ( {title, buttonStyle, setModal} ) {
                  </Card>
               : <Card style={{width: '18rem', minHeight: '413px', marginTop: '1.5rem'}} >
                    <Card.Img variant="top" src={dogovor} />
-                  <Card.Body>
+                  <Card.Body style={{backgroundColor: '#e1dede'}}>
                   <Card.Title style={{fontSize: '18px'}} >
                      {title}
                    </Card.Title>

@@ -40,8 +40,8 @@ function Home() {
         <Navibar/>
         <Jumbotron/>
         <Blanc/>
-        <Contract setModal={[setModal, setModal2, setModal3]}  />
         <Anounce/>
+        <Contract setModal={[setModal, setModal2, setModal3]}  />
         <UlComp/>
         <Footer/>
     </div>

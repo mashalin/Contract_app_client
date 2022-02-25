@@ -9,6 +9,8 @@ import axios from "axios";
 import { saveAs } from "file-saver";
 import { fetchAllCourses } from "../http/courseApi";
 import translate from 'translate';
+import { fetchYear } from "../http/YearApi";
+import { createJournal } from "../http/JournalApi";
 
 const Print = observer(() => {
   const [select, setSelect] = useState("");
@@ -40,10 +42,15 @@ const Print = observer(() => {
     "Заполните это поле!"
   );
   const [colNapravError, setColNapravError] = useState("Заполните это поле!");
+  const [id, setId] = useState('');
+  const [colvo, setColvo] = useState('');
 
   const { cathedra } = useContext(Context);
   const { customer } = useContext(Context);
   const { course } = useContext(Context);
+  const { year } = useContext(Context);
+
+  const [yearText, setYearText] = useState({});
 
   translate.engine = "google"; 
   translate.key = process.env.GOOGLE_KEY;
@@ -57,6 +64,7 @@ const Print = observer(() => {
 
   useEffect(() => {
     fetchCathedras().then((data) => cathedra.setCathedras(data));
+    fetchYear().then((data) => setYearText(data[0]));
   }, []);
 
   useEffect(() => {
@@ -73,6 +81,7 @@ const Print = observer(() => {
         setCour(cours.name);
         setDate(cours.date);
         setPrice(cours.price);
+        setId(cours.id);
       }
     });
   }, [firstNum]);
@@ -104,6 +113,16 @@ const Print = observer(() => {
       setSelectError('');
     }
   }, [cathValue, colNaprav, firstNum, firstNaprav, select]);
+
+  useEffect( () => {
+      if (colNaprav == 1) {
+        setColvo(`${firstNaprav}`);
+      } else {
+        let lastNaprav = Number(firstNaprav) + Number(colNaprav) - 1;
+        setColvo(`${firstNaprav}-${lastNaprav}`);
+      }
+  }, [firstNaprav, colNaprav])
+
 
   useEffect(() => {
     if(cathValueError || colNapravError || firstNumError || firstNapravError || selectError) {
@@ -157,6 +176,7 @@ const Print = observer(() => {
       cour: cour,
       date: date,
       price: price,
+      year: yearText.name,
     };
 
     if (select == 'Бесплатное') {
@@ -171,6 +191,7 @@ const Print = observer(() => {
         text.then(data => {
           data = data.split(' ').join('_');
           saveAs(docxBlob, `napravlenie_${data}.docx`);
+          createJournal({ organ: cusValue, colvo: colNaprav, courseId: id, numbers: colvo }).then((data) => {});
         });
       });
     } else if (select == 'Платное_физ') {
@@ -185,6 +206,7 @@ const Print = observer(() => {
         text.then(data => {
           data = data.split(' ').join('_');
           saveAs(docxBlob2, `napravlenie_${data}.docx`);
+          createJournal({ organ: cusValue, colvo: colNaprav, courseId: id, numbers: colvo }).then((data) => {});
         });
       });
     } else {
@@ -199,6 +221,7 @@ const Print = observer(() => {
         text.then(data => {
           data = data.split(' ').join('_');
           saveAs(docxBlob3, `napravlenie_${data}.docx`);
+          createJournal({ organ: cusValue, colvo: colNaprav, courseId: id, numbers: colvo }).then((data) => {});
         });
       });
     }

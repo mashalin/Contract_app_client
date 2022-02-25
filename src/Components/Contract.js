@@ -3,7 +3,7 @@ import ContractCard from "./ContractCard";
 
 function Contract({setModal}) {
     return(
-        <div style={{backgroundColor: '#cdcaca'}} >
+        <div >
             <Container style={{paddingTop: '3.5rem', paddingBottom: '5rem'}} >
             <Row>
                 <ContractCard setModal={setModal[0]} buttonStyle={{marginTop: '1rem'}} title="Договор о повышении квалификации руководящего работника (специалиста) за счет средств республиканского (местного) бюджета" />

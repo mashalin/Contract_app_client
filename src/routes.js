@@ -7,7 +7,10 @@ import Customer from "./pages/Customer"
 import Home from "./pages/Home"
 import Print from "./pages/Print"
 import File from "./pages/File"
-import { ADMIN_ROUTE, ANNOUNCE_ROUTE, CATHEDRA_ROUTE, CONTRACT_ROUTE, COURSE_ROUTE,  CUSTOMER_ROUTE, FILE_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRINT_ROUTE } from "./utils/consts"
+import { ADMIN_ROUTE, ANNOUNCE_ROUTE, CATHEDRA_ROUTE, CONTRACT_ROUTE, COURSE_ROUTE,  CREATE_DOGOVOR_ROUTE,  CUSTOMER_ROUTE, DOGOVOR_ROUTE, FILE_ROUTE, HOME_ROUTE, JOURNAL_ROUTE, LOGIN_ROUTE, PRINT_ROUTE } from "./utils/consts"
+import Contract from "./pages/Contract"
+import CreateDogovor from "./pages/CreateDogovor"
+import Journal from "./pages/Journal"
 
 export const authRoutes = [
     {
@@ -37,6 +40,18 @@ export const authRoutes = [
     {
         path: FILE_ROUTE,
         Component: <File/>
+    },
+    {
+        path: DOGOVOR_ROUTE,
+        Component: <Contract/>
+    },
+    {
+        path: CREATE_DOGOVOR_ROUTE,
+        Component: <CreateDogovor/>
+    },
+    {
+        path: JOURNAL_ROUTE,
+        Component: <Journal/>
     },
 ]
 

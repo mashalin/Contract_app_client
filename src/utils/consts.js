@@ -8,3 +8,6 @@ export const PRINT_ROUTE = '/print';
 export const CONTRACT_ROUTE = '/invoice';
 export const FILE_ROUTE = '/file';
 export const LOGIN_ROUTE = '/login';
+export const DOGOVOR_ROUTE = '/contract';
+export const CREATE_DOGOVOR_ROUTE = '/create';
+export const JOURNAL_ROUTE = '/journal';
