@@ -132,7 +132,7 @@ const ContractModal1 = observer(({ setVisible, setLoading }) => {
         text.then(data => {
           data = data.split(' ').join('_');
           saveAs(pdfBlob, `BGMU_Dogovor_${data}.pdf`);
-          createContract({ fullname: server.fullName, courseId: id }).then((data) => {});
+          createContract({ fullname: server.fullName, courseId: id, naprav: server.directionNamber }).then((data) => {});
         })
       }).finally( () => setLoading(false));
     setVisible(false);

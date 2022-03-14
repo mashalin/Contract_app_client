@@ -4,7 +4,13 @@ import { Button } from "react-bootstrap";
 import { Context } from "..";
 import { updateContract } from "../http/ContractApi";
 
-function EditContractModal({ setVisible, setContractEdit, contractEdit, num, setNum }) {
+function EditContractModal({
+  setVisible,
+  setContractEdit,
+  contractEdit,
+  num,
+  setNum,
+}) {
   const { contract } = useContext(Context);
   const { course } = useContext(Context);
 
@@ -12,21 +18,18 @@ function EditContractModal({ setVisible, setContractEdit, contractEdit, num, set
     if (num) {
       course.allCourses.forEach((cours) => {
         if (cours.number == num) {
-          setContractEdit({...contractEdit, courseId: cours.id});
+          setContractEdit({ ...contractEdit, courseId: cours.id });
         }
       });
     }
-  }, [num])
+  }, [num]);
 
- 
- const updateCont = () => {
-    updateContract(contractEdit.id, contractEdit).then(
-      (data) => {
-        setContractEdit({});
-        setVisible(false);
-        window.location.reload();
-      }
-    );
+  const updateCont = () => {
+    updateContract(contractEdit.id, contractEdit).then((data) => {
+      setContractEdit({});
+      setVisible(false);
+      window.location.reload();
+    });
   };
 
   return (
@@ -35,33 +38,51 @@ function EditContractModal({ setVisible, setContractEdit, contractEdit, num, set
         Редактировать слушателя
       </h3>
       <div className="cath_modal">
-          <input
+        <input
           onChange={(e) => setNum(e.target.value)}
           value={num}
           type="number"
           placeholder="Введите №ПК..."
-         
         />
         {course.allCourses.map((cours) => {
           if (cours.number == num) {
-            return <div style={{maxWidth: '500px'}} key={cours.id}> {cours.name} </div>;
+            return (
+              <div style={{ maxWidth: "500px" }} key={cours.id}>
+                {" "}
+                {cours.name}{" "}
+              </div>
+            );
           }
         })}
-        
+
         <input
-          onChange={(e) => setContractEdit({...contractEdit, fullname: e.target.value})}
-          value={contractEdit.fullname || ''}
+          onChange={(e) =>
+            setContractEdit({ ...contractEdit, fullname: e.target.value })
+          }
+          value={contractEdit.fullname || ""}
           type="text"
           placeholder="Введите ФИО слушателя..."
-         
         />
-        
+
+        <input
+          onChange={(e) =>
+            setContractEdit({ ...contractEdit, naprav: e.target.value })
+          }
+          value={contractEdit.naprav || ""}
+          type="text"
+          placeholder="Введите №направления слушателя..."
+        />
+
       </div>
       <div style={{ marginTop: "5rem" }}>
         <Button variant="secondary" onClick={() => setVisible(false)}>
           Отменить
         </Button>
-        <Button onClick={updateCont} style={{ marginLeft: "5px" }} variant="success">
+        <Button
+          onClick={updateCont}
+          style={{ marginLeft: "5px" }}
+          variant="success"
+        >
           Сохранить
         </Button>
       </div>

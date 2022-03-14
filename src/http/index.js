@@ -7,7 +7,7 @@ const $host = axios.create({
 
 const $authHost = axios.create({
     baseURL: 'https://pkd.bsmu.by'
-     //baseURL: 'http://localhost:5000'
+    // baseURL: 'http://localhost:5000'
 })
 
 const authInterceptor = config => {

@@ -7,12 +7,15 @@ import edit from "./../imgs/edit_icon.svg";
 import { useContext, useEffect } from "react";
 import { fetchAllCourses } from "../http/courseApi";
 import { useState } from "react";
-import { deleteContract, fetchContracts, fetchOneContract } from "../http/ContractApi";
+import {
+  deleteContract,
+  fetchContracts,
+  fetchOneContract,
+} from "../http/ContractApi";
 import MyModal from "../UI/MyModal/MyModal";
 import DogovorModal from "../Components/DogovorModal";
 import EditContractModal from "../Components/EditContractModal";
 import DeleteContractModal from "../Components/DeleteContractModal";
-
 
 const Contract = observer(() => {
   const [value, setValue] = useState("");
@@ -21,7 +24,7 @@ const Contract = observer(() => {
   const [deleteModal, setDeleteModal] = useState(false);
   const [ed, setEd] = useState(false);
   const [contractEdit, setContractEdit] = useState({});
-  const [num, setNum] = useState('');
+  const [num, setNum] = useState("");
 
   const { contract } = useContext(Context);
   const { course } = useContext(Context);
@@ -42,7 +45,8 @@ const Contract = observer(() => {
     if (id) {
       fetchContracts({ courseId: id }).then((data) => {
         contract.setContracts(data);
-         setId("");
+        contract.setCount(data.length);
+        setId("");
       });
     } else {
       alert("Введите номер курса!");
@@ -63,13 +67,12 @@ const Contract = observer(() => {
         }
       });
     }
-  }, [contractEdit.courseId])
+  }, [contractEdit.courseId]);
 
   function editFunc(id) {
     setEd(true);
-    fetchOneContract(id).then(data => setContractEdit(data));
-}
-
+    fetchOneContract(id).then((data) => setContractEdit(data));
+  }
 
   return (
     <div style={{ marginBottom: "4rem" }}>
@@ -80,10 +83,17 @@ const Contract = observer(() => {
           <DogovorModal setVisible={setModal} />
         </MyModal>
 
-        <MyModal visible={ed} setVisible={setEd} > 
-                        <EditContractModal setNum={setNum} num={num} setContractEdit={setContractEdit} contractEdit={contractEdit} setVisible={setEd} visible={ed} />
-                 </MyModal>
-        
+        <MyModal visible={ed} setVisible={setEd}>
+          <EditContractModal
+            setNum={setNum}
+            num={num}
+            setContractEdit={setContractEdit}
+            contractEdit={contractEdit}
+            setVisible={setEd}
+            visible={ed}
+          />
+        </MyModal>
+
         <MyModal visible={deleteModal} setVisible={setDeleteModal}>
           <DeleteContractModal setVisible={setDeleteModal} />
         </MyModal>
@@ -111,7 +121,11 @@ const Contract = observer(() => {
           </Col>
           <Col md={3}></Col>
           <Col md={2}>
-            <Button  onClick={() => setModal(true)} style={{ marginTop: "3px" }} variant="success">
+            <Button
+              onClick={() => setModal(true)}
+              style={{ marginTop: "3px" }}
+              variant="success"
+            >
               Добавить слушателя
             </Button>
           </Col>
@@ -124,16 +138,21 @@ const Contract = observer(() => {
         })}
 
         <div style={{ marginTop: "4rem" }} className="cusHead">
-          Слушатели
+          <Row>
+            <Col>Слушатели</Col>
+            <Col>№ направления</Col>
+          </Row>
         </div>
+
 
         {contract.contracts.map((cont) => (
           <div className="admItem" key={cont.id}>
             <Row>
-              <Col md={10}>{cont.fullname}</Col>
+              <Col md={6}>{cont.fullname}</Col>
+              <Col style={{paddingLeft: '4rem', fontSize: '22px'}} md={4}>{cont.naprav}</Col>
               <Col md={1}>
                 <img
-                onClick={() => editFunc(cont.id)}
+                  onClick={() => editFunc(cont.id)}
                   style={{ height: "27px", cursor: "pointer" }}
                   src={edit}
                   alt=""
@@ -151,13 +170,20 @@ const Contract = observer(() => {
           </div>
         ))}
 
-        <Button
+        <Row>
+          <Col>
+            <Button
               onClick={() => setDeleteModal(true)}
-              style={{marginTop: '4rem'}}
+              style={{ marginTop: "4rem" }}
               variant="success"
             >
               Удалить всех слушателей с курса
             </Button>
+          </Col>
+          <Col style={{ marginTop: "4.5rem", textAlign: "center" }}>
+            {contract.count ? <h4> Всего: {contract.count}</h4> : <></>}
+          </Col>
+        </Row>
       </Container>
     </div>
   );

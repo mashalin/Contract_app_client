@@ -9,6 +9,8 @@ function DogovorModal({ setVisible }) {
 
   const [courseNum, setCourseNum] = useState("");
 
+  const [naprav, setNaprav] = useState('');
+
   const { course } = useContext(Context);
 
   useEffect(() => {
@@ -24,10 +26,12 @@ function DogovorModal({ setVisible }) {
       createContract({
         fullname: fullname,
         courseId: courseId,
+        naprav: naprav
       }).then((data) => {
         setFullname("");
         setCourseId("");
         setCourseNum("");
+        setNaprav(null);
         setVisible(false);
         window.location.reload();
       });
@@ -57,6 +61,12 @@ function DogovorModal({ setVisible }) {
           value={fullname}
           type="text"
           placeholder="Введите ФИО слушателя..."
+        />
+         <input
+          onChange={(e) => setNaprav(e.target.value)}
+          value={naprav}
+          type="text"
+          placeholder="Введите №направления слушателя..."
         />
       </div>
       <div style={{ marginTop: "5rem" }}>
