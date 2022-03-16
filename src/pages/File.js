@@ -11,6 +11,10 @@ import { createDocFile2, deleteDocFile2 } from "../http/DocFile2Api";
 import { createDocFile3, deleteDocFile3 } from "../http/DocFile3Api";
 import { createDocFile4, deleteDocFile4 } from "../http/DocFile4Api";
 import { createDocFile5, deleteDocFile5 } from "../http/DocFile5Api";
+import CardComponent from "../Components/CardComponent";
+import { createNapravFile1, deleteNapravFile1 } from "../http/NapravFile1Api";
+import { createNapravFile2, deleteNapravFile2 } from "../http/NapravFile2Api";
+import { createNapravFile3, deleteNapravFile3 } from "../http/NapravFile3Api";
 
 function File() {
   const [file1, setFile1] = useState(null);
@@ -21,6 +25,9 @@ function File() {
   const [doc3, setDoc3] = useState(null);
   const [doc4, setDoc4] = useState(null);
   const [doc5, setDoc5] = useState(null);
+  const [naprav1, setNaprav1] = useState(null);
+  const [naprav2, setNaprav2] = useState(null);
+  const [naprav3, setNaprav3] = useState(null);
 
   function selectFile1(e) {
     setFile1(e.target.files[0]);
@@ -174,6 +181,63 @@ function File() {
     }
   }
 
+  function selectNaprav1(e) {
+    setNaprav1(e.target.files[0]);
+  }
+
+  function postNaprav1() {
+    if (naprav1) {
+      const formData = new FormData();
+    formData.append("file", naprav1);
+
+    createNapravFile1(formData).then((data) => {
+      deleteNapravFile1(data.id - 1).then((data) => {
+        alert("Шаблон был изменён!");
+      });
+    });
+    } else {
+      alert('Шаблон не выбран!');
+    }
+  }
+
+  function selectNaprav2(e) {
+    setNaprav2(e.target.files[0]);
+  }
+
+  function postNaprav2() {
+    if (naprav2) {
+      const formData = new FormData();
+    formData.append("file", naprav2);
+
+    createNapravFile2(formData).then((data) => {
+      deleteNapravFile2(data.id - 1).then((data) => {
+        alert("Шаблон был изменён!");
+      });
+    });
+    } else {
+      alert('Шаблон не выбран!');
+    }
+  }
+
+  function selectNaprav3(e) {
+    setNaprav3(e.target.files[0]);
+  }
+
+  function postNaprav3() {
+    if (naprav3) {
+      const formData = new FormData();
+    formData.append("file", naprav3);
+
+    createNapravFile3(formData).then((data) => {
+      deleteNapravFile3(data.id - 1).then((data) => {
+        alert("Шаблон был изменён!");
+      });
+    });
+    } else {
+      alert('Шаблон не выбран!');
+    }
+  }
+
   function DownloadTemp1() {
     axios
       .get(process.env.REACT_APP_HOST + "/download", { responseType: "blob" })
@@ -254,6 +318,38 @@ function File() {
       });
   }
 
+  function DownloadNaprav1() {
+    axios
+      .get(process.env.REACT_APP_HOST + "/downloadNaprav1", { responseType: "blob" })
+      .then((res) => {
+        const pdfBlob2 = new Blob([res.data], { type: "application/docx" });
+
+        saveAs(pdfBlob2, "naprav1.docx");
+      });
+  }
+
+  function DownloadNaprav2() {
+    axios
+      .get(process.env.REACT_APP_HOST + "/downloadNaprav2", { responseType: "blob" })
+      .then((res) => {
+        const pdfBlob2 = new Blob([res.data], { type: "application/docx" });
+
+        saveAs(pdfBlob2, "naprav2.docx");
+      });
+  }
+
+  function DownloadNaprav3() {
+    axios
+      .get(process.env.REACT_APP_HOST + "/downloadNaprav3", { responseType: "blob" })
+      .then((res) => {
+        const pdfBlob2 = new Blob([res.data], { type: "application/docx" });
+
+        saveAs(pdfBlob2, "naprav3.docx");
+      });
+  }
+
+
+
   return (
     <div style={{ marginBottom: "4rem" }}>
       <AdminNavbar />
@@ -261,339 +357,59 @@ function File() {
         <h2 style={{ textAlign: "center" }}>Редактор шаблонов договоров</h2>
         <Row style={{ marginTop: "4rem" }}>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
-                  Шаблон договора №1 (за счет средств республиканского бюджета)
-                </Card.Title>
-                <div style={{marginTop: '1rem'}} className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadTemp1} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectFile1}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postFile1}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+            <CardComponent name='Шаблон договора №1 (за счет средств республиканского бюджета)'
+            DownloadTemp={DownloadTemp1} selectFile={selectFile1} postFile={postFile1} marginTop='1rem' />
           </Col>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title
-                  style={{ textAlign: "center"}}
-                >
-                  Шаблон договора №2 (на платной основе для физ.лиц)
-                </Card.Title>
-                <div className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadTemp2} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectFile2}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postFile2}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон договора №2 (на платной основе для физ.лиц)'
+            DownloadTemp={DownloadTemp2} selectFile={selectFile2} postFile={postFile2} marginTop='2.5rem' />
           </Col>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
-                  Шаблон договора №3 (на платной основе для организаций)
-                </Card.Title>
-                <div style={{marginTop: '1rem'}} className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadTemp3} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectFile3}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postFile3}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон договора №3 (на платной основе для организаций)'
+            DownloadTemp={DownloadTemp3} selectFile={selectFile3} postFile={postFile3} marginTop='1rem' />
           </Col>
         </Row>
 
         <Row style={{ marginTop: "3rem" }}>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
-                  Шаблон приказа о зачислении на повышение квалификации
-                </Card.Title>
-                <div className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadDoc1} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectDoc1}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postDoc1}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон приказа о зачислении на повышение квалификации'
+            DownloadTemp={DownloadDoc1} selectFile={selectDoc1} postFile={postDoc1} marginTop='2.5rem' />
           </Col>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title
-                  style={{ textAlign: "center", marginBottom: "2rem" }}
-                >
-                  Шаблон приказа о прекращении образовательных отношений
-                </Card.Title>
-                <div className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadDoc2} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectDoc2}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postDoc2}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон приказа о прекращении образовательных отношений'
+            DownloadTemp={DownloadDoc2} selectFile={selectDoc2} postFile={postDoc2} marginTop='2.5rem' />
           </Col>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
-                  Шаблон приказа о проведении итоговой аттестации
-                </Card.Title>
-                <div className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadDoc3} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectDoc3}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postDoc3}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон приказа о проведении итоговой аттестации'
+            DownloadTemp={DownloadDoc3} selectFile={selectDoc3} postFile={postDoc3} marginTop='2.5rem' />
           </Col>
         </Row>
 
         <Row style={{ marginTop: "3rem" }}>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title style={{ textAlign: "center" }}>
-                  Шаблон Зачётно-Экзаменационной ведомости
-                </Card.Title>
-                <div className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadDoc4} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectDoc4}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postDoc4}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон Зачётно-Экзаменационной ведомости'
+            DownloadTemp={DownloadDoc4} selectFile={selectDoc4} postFile={postDoc4} marginTop='2.5rem' />
           </Col>
           <Col>
-            <Card
-              style={{ width: "22rem", backgroundColor: "rgb(239 235 235)" }}
-            >
-              <Card.Body>
-                <Card.Title
-                  style={{ textAlign: "center", marginBottom: "4rem" }}
-                >
-                  Шаблон журнала направлений
-                </Card.Title>
-                <div className="hr"></div>
-                <Card.Text
-                  style={{
-                    marginTop: "2rem",
-                    fontFamily: "Roboto",
-                    fontSize: "20px",
-                  }}
-                >
-                  Посмотреть текущий шаблон:
-                </Card.Text>
-                <Button onClick={DownloadDoc5} variant="success">
-                  Смотреть
-                </Button>
-                <div className="hr"></div>
-                <Card.Text style={{ fontFamily: "Roboto", fontSize: "20px" }}>
-                  Выбрать новый шаблон:
-                </Card.Text>
-                <input
-                  onChange={selectDoc5}
-                  className="file"
-                  type="file"
-                ></input>
-                <Button
-                  onClick={postDoc5}
-                  style={{ marginTop: "1.5rem" }}
-                  variant="success"
-                >
-                  Заменить
-                </Button>
-              </Card.Body>
-            </Card>
+             <CardComponent name='Шаблон журнала направлений'
+            DownloadTemp={DownloadDoc5} selectFile={selectDoc5} postFile={postDoc5} marginTop='4rem' />
           </Col>
           <Col>
-           
+          <CardComponent name='Шаблон направления №1 (за счет средств республиканского бюджета)'
+            DownloadTemp={DownloadNaprav1} selectFile={selectNaprav1} postFile={postNaprav1} marginTop='1rem' />
+          </Col>
+        </Row>
+
+        <Row style={{ marginTop: "3rem" }}>
+          <Col>
+             <CardComponent name='Шаблон направления №2 (на платной основе для физ.лиц)'
+            DownloadTemp={DownloadNaprav2} selectFile={selectNaprav2} postFile={postNaprav2} marginTop='2.5rem' />
+          </Col>
+          <Col>
+             <CardComponent name='Шаблон направления №3 (на платной основе для организаций)'
+            DownloadTemp={DownloadNaprav3} selectFile={selectNaprav3} postFile={postNaprav3} marginTop='1rem' />
+          </Col>
+          <Col>
           </Col>
         </Row>
       </Container>

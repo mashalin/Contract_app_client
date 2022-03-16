@@ -2,7 +2,7 @@ import axios from "axios";
 
 const $host = axios.create({
      baseURL: 'https://pkd.bsmu.by'
-     //baseURL: 'http://localhost:5000'
+    // baseURL: 'http://localhost:5000'
 })
 
 const $authHost = axios.create({
