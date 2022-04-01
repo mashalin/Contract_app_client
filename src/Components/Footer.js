@@ -16,7 +16,7 @@ function Footer() {
     return(
 
         <div style={{ backgroundColor: '#484545', paddingTop: '3rem', paddingBottom: '3rem'}} >
-            <Row>
+            <Row style={{width: '100%'}} >
                 <Col sm={6} md={7} lg={8} >
                  <div className='footer_div' style={{marginLeft: '7%'}} >
                    © 1921—{year} Учреждение образования «Белорусский государственный медицинский университет».
