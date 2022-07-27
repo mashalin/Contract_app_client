@@ -29,7 +29,7 @@ function Footer() {
                       : {marginTop: '0px'}
                   }>
                       <a className='footer_link' rel="noreferrer" target='_blank' href="https://www.bsmu.by/page/18/1481/">Контактная информация</a>
-                     <div className='footer_div' >220116, г. Минск, пр. Дзержинского, 83</div>
+                     <div className='footer_div' >220083, г. Минск, пр. Дзержинского, 83</div>
                      <div className='footer_div' >Тел: +375 17 252-12-01. Факс: +375 17 348-12-02</div>
                    </div>
                 </Col>
